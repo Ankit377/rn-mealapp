@@ -10,12 +10,9 @@ import {
 import Api from "../api/Api";
 
 import axios from "axios";
-import Colors from "../constants/color";
 import CategoryGridTile from "../components/CategoryGridTile";
 
-let width = Dimensions.get("window").width; //full width
-
-const CategoryMealsScreen = (props) => {
+const SubCategoryScreen = (props) => {
   const [subCat, setsubCat] = useState([]);
   //console.log(props.navigation.getParam("categoryId"));
   const catId = props.navigation.getParam("categoryId");
@@ -36,7 +33,7 @@ const CategoryMealsScreen = (props) => {
     //   //console.log(error);
     //   return setErr(error);
     // });
-  }, []);
+  }, [1]);
   const renderGridItem = (itemData) => {
     // console.log(itemData.item.separators);
 
@@ -46,10 +43,10 @@ const CategoryMealsScreen = (props) => {
         title={itemData.item.name}
         onSelect={() => {
           props.navigation.navigate({
-            routeName: "CategoryMeals",
+            routeName: "ProuductList",
             params: {
-              categoryId: itemData.item._id,
-              category_name: itemData.item.name,
+              subcategoryId: itemData.item._id,
+              subcategory_name: itemData.item.name,
             },
           });
         }}
@@ -67,9 +64,10 @@ const CategoryMealsScreen = (props) => {
     </View>
   );
 };
-CategoryMealsScreen.navigationOptions = (navigationData) => {
+SubCategoryScreen.navigationOptions = (navigationData) => {
   //console.log(navigationData.navigation.state.params.category_name);
-  const currentCat = navigationData.navigation.state.params.category_name;
+  // const currentCat = navigationData.navigation.state.params.category_name;
+  const currentCat = navigationData.navigation.getParam("category_name");
   return {
     headerTitle: currentCat,
   };
@@ -77,4 +75,4 @@ CategoryMealsScreen.navigationOptions = (navigationData) => {
 
 const styles = StyleSheet.create({});
 
-export default CategoryMealsScreen;
+export default SubCategoryScreen;

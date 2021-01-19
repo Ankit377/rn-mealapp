@@ -2,8 +2,9 @@ import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
 
 import CategoriesScreen from "../screens/CategoriesScreen";
-import CategoryMealsScreen from "../screens/CategoryMealsScreen";
-import MealDetailsScreen from "../screens/MealDetailsScreen";
+import SubCategoryScreen from "../screens/SubCategoryScreen";
+import ProductList from "../screens/ProductList";
+import ProductDetailsScreen from "../screens/ProductDetailsScreen";
 import Colors from "../constants/color";
 
 const MealsNavigator = createStackNavigator(
@@ -11,10 +12,11 @@ const MealsNavigator = createStackNavigator(
     Categories: {
       screen: CategoriesScreen,
     },
-    CategoryMeals: {
-      screen: CategoryMealsScreen,
+    SubCategory: {
+      screen: SubCategoryScreen,
     },
-    MealDetail: MealDetailsScreen,
+    ProuductList: ProductList,
+    ProductDetail: ProductDetailsScreen,
   },
   {
     initialRouteName: "Categories",

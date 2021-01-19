@@ -24,7 +24,7 @@ const CategoriesScreen = (props) => {
         //console.log(error);
         return setErr(error);
       });
-  }, [prodCat]);
+  }, [1]);
 
   const renderGridItem = (itemData) => {
     // console.log(itemData.item.separators);
@@ -34,7 +34,7 @@ const CategoriesScreen = (props) => {
         imgsource={itemData.item.image}
         onSelect={() =>
           props.navigation.navigate({
-            routeName: "CategoryMeals",
+            routeName: "SubCategory",
             params: {
               categoryId: itemData.item._id,
               category_name: itemData.item.name,
