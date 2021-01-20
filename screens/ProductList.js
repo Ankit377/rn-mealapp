@@ -29,7 +29,7 @@ const ProductList = (props) => {
     // });
   }, []);
   const renderGridItem = (itemData) => {
-    console.log(itemData);
+    // console.log(itemData);
 
     return (
       <ProductGridTile
@@ -40,12 +40,7 @@ const ProductList = (props) => {
           props.navigation.navigate({
             routeName: "ProductDetail",
             params: {
-              productId: itemData.item._id,
-              product_name: itemData.item.name,
-              image: itemData.item.image,
-              description: itemData.item.description,
-              other_images: itemData.item.other_images,
-              price: itemData.item,
+              productData: itemData.item,
             },
           });
         }}

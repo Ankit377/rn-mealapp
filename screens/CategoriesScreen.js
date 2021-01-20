@@ -4,6 +4,8 @@ import { CATEGORIES } from "../data/dummy-data";
 import axios from "axios";
 import Api from "../api/Api";
 import CategoryGridTile from "../components/CategoryGridTile";
+import { HeaderButtons, Item } from "react-navigation-header-buttons";
+import { Feather } from "@expo/vector-icons";
 
 const CategoriesScreen = (props) => {
   const [prodCat, setprodCat] = useState([]);
@@ -56,8 +58,23 @@ const CategoriesScreen = (props) => {
   );
 };
 
-CategoriesScreen.navigationOptions = {
-  headerTitle: "Aarchi Enterprises",
+CategoriesScreen.navigationOptions = (navData) => {
+  console.log(navData);
+  return {
+    headerTitle: "Aarchi Enterprises",
+    headerLeft: () => (
+      <HeaderButtons HeaderButtonComponent={Feather}>
+        <Item
+          name="menu"
+          size={24}
+          color="black"
+          onPress={() => {
+            console.log(navData.navigation);
+          }}
+        />
+      </HeaderButtons>
+    ),
+  };
 };
 
 const styles = StyleSheet.create({});

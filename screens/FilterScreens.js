@@ -8,6 +8,9 @@ const FilterScreens = (props) => {
     </View>
   );
 };
+FilterScreens.navigationOptions = (navigation) => {
+  return { headerTitle: " filter screen" };
+};
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
