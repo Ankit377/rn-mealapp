@@ -1,13 +1,7 @@
 import React, { useState, useEffect } from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  Button,
-  Dimensions,
-  FlatList,
-} from "react-native";
+import { View, Text, StyleSheet, FlatList } from "react-native";
 import Api from "../api/Api";
+import { NavigationActions } from "react-navigation";
 
 import axios from "axios";
 import CategoryGridTile from "../components/CategoryGridTile";
@@ -33,7 +27,12 @@ const SubCategoryScreen = (props) => {
     //   //console.log(error);
     //   return setErr(error);
     // });
-  }, [1]);
+  }, [catId]);
+  useEffect(() => {
+    //props.navigation not used as it is now  a navigation variable
+    props.navigation.setParams({ subCat });
+  }, [subCat]);
+
   const renderGridItem = (itemData) => {
     // console.log(itemData.item.separators);
 
@@ -49,6 +48,13 @@ const SubCategoryScreen = (props) => {
               subcategory_name: itemData.item.name,
             },
           });
+
+          // console.log("2nd function work"); it is used to send data into another component in same navigation router
+          // const setParamsAction = NavigationActions.setParams({
+          //   params: { subId: itemData },
+          //   key: "products",
+          // });
+          // props.navigation.dispatch(setParamsAction);
         }}
       />
     );

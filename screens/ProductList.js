@@ -4,11 +4,20 @@ import Api from "../api/Api";
 
 import axios from "axios";
 import ProductGridTile from "../components/ProductGridTile";
+import { useSelector } from "react-redux";
 
 const ProductList = (props) => {
   const [products, setProducts] = useState([]);
   //console.log(props.navigation.getParam("subcategoryId"));
   const subcatId = props.navigation.getParam("subcategoryId");
+
+  /*   const availableProducts = useSelector((state) => state.products.Products);
+  //console.log(availableProducts);
+
+  const displayProducts = availableProducts.filter(
+    (productsAll) => productsAll.sub_category_id == subcatId
+  ); */
+  //console.log(displayProducts);
 
   useEffect(() => {
     axios({

@@ -1,5 +1,5 @@
 import React from "react";
-import { createAppContainer } from "react-navigation";
+import { createAppContainer, createSwitchNavigator } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
 import { createBottomTabNavigator } from "react-navigation-tabs";
 import CategoriesScreen from "../screens/CategoriesScreen";
@@ -10,7 +10,9 @@ import Colors from "../constants/color";
 import FavoriteScreens from "../screens/FavoriteScreens";
 import { AntDesign, MaterialCommunityIcons } from "@expo/vector-icons";
 import { createDrawerNavigator } from "react-navigation-drawer";
+
 import FilterScreens from "../screens/FilterScreens";
+import Login from "../user/Login";
 
 const defaulutStackNavigator = {
     headerStyle: {
@@ -18,7 +20,7 @@ const defaulutStackNavigator = {
     },
     headerTintColor: "#fff",
     headerTitleStyle: {
-      fontWeight: "bold",
+      fontWeight: "normal",
     },
   },
   MealsNavigator = createStackNavigator(
@@ -91,12 +93,40 @@ const ProductFavTabNavigator = createBottomTabNavigator(
     },
   }
 );
-const FiltersNavigator = createStackNavigator({
-  Filters: FilterScreens,
-});
-const MainNavigator = createDrawerNavigator({
-  CategoryHome: ProductFavTabNavigator,
-  Filters: FiltersNavigator,
+const FiltersNavigator = createStackNavigator(
+  {
+    Filters: FilterScreens,
+  },
+  {
+    navigationOptions: {
+      drawerLabel: "Filters Products",
+    },
+    defaultNavigationOptions: defaulutStackNavigator,
+  }
+);
+const MainNavigator = createDrawerNavigator(
+  {
+    Home: ProductFavTabNavigator,
+    Filters: FiltersNavigator,
+  },
+  {
+    contentOptions: {
+      activeTintColor: Colors.Primary,
+
+      labelStyle: {
+        fontSize: 16,
+        justifyContent: "space-between",
+      },
+    },
+  }
+);
+/* const AuthNavigator = createStackNavigator({
+  Login: Login,
 });
 
-export default createAppContainer(ProductFavTabNavigator);
+const SuperNavigator = createSwitchNavigator({
+  Login: AuthNavigator,
+  // ManinNavigator: MainNavigator,
+}); */
+
+export default createAppContainer(MainNavigator);

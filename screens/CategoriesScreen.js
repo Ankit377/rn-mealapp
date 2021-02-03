@@ -5,7 +5,10 @@ import axios from "axios";
 import Api from "../api/Api";
 import CategoryGridTile from "../components/CategoryGridTile";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
-import { Feather } from "@expo/vector-icons";
+import CustomHeaderButton from "../components/HeaderButton";
+// import { productsReducer } from "../store/reducers/products";
+
+// console.log(productsReducer);
 
 const CategoriesScreen = (props) => {
   const [prodCat, setprodCat] = useState([]);
@@ -16,17 +19,17 @@ const CategoriesScreen = (props) => {
     axios({
       method: "post",
 
-      url: `${Api}` + "/get-categories",
+      url: `${Api}/get-categories`,
     })
       .then((res) => {
-        //console.log(res.data.data);
+        // console.log(res.data.data);
         return setprodCat(res.data.data);
       })
       .catch((error) => {
         //console.log(error);
         return setErr(error);
       });
-  }, [1]);
+  }, []);
 
   const renderGridItem = (itemData) => {
     // console.log(itemData.item.separators);
@@ -59,17 +62,16 @@ const CategoriesScreen = (props) => {
 };
 
 CategoriesScreen.navigationOptions = (navData) => {
-  console.log(navData);
+  //console.log(navData);
   return {
     headerTitle: "Aarchi Enterprises",
     headerLeft: () => (
-      <HeaderButtons HeaderButtonComponent={Feather}>
+      <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
         <Item
-          name="menu"
-          size={24}
-          color="black"
+          title="menu"
+          iconName="ios-menu"
           onPress={() => {
-            console.log(navData.navigation);
+            navData.navigation.toggleDrawer();
           }}
         />
       </HeaderButtons>
