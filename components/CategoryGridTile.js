@@ -20,12 +20,12 @@ const CategoryGridTile = (props) => {
 const styles = StyleSheet.create({
   gridView: {
     flex: 1,
-    height: 150,
+    // height: 150,
     margin: 3,
   },
   container: {
     flex: 1,
-    // width: width / 2,
+
     borderWidth: 0.2,
     borderColor: "#A9A9A9",
     justifyContent: "center",

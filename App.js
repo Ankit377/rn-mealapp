@@ -17,8 +17,7 @@ import { Provider, useDispatch } from "react-redux";
 import ReduxThunk from "redux-thunk";
 import { AuthContext } from "./context/Context";
 import RootNavigator from "./navigation/RootNavigator";
-import { fetchProduct } from "./store/actions/productsAction";
-
+import { fetchProduct, getProducts } from "./store/actions/productsAction";
 enableScreens();
 
 const rootReducer = combineReducers({
@@ -29,7 +28,7 @@ const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
 store.subscribe(() => {
   console.log(store.getState());
 });
-store.dispatch(fetchProduct());
+//store.dispatch(fetchProduct());
 //console.log(store.dispatch(fetchProduct()));
 
 //const dispatch = useDispatch();

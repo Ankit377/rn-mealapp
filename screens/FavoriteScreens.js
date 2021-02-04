@@ -10,7 +10,7 @@ const FavoriteScreens = (props) => {
 
   const favData = useSelector((state) => state.products.favoriteProducts);
 
-  console.log(favData);
+  console.log(favData, "favData");
 
   const renderGridItem = (itemData) => {
     //console.log(itemData);
@@ -20,6 +20,14 @@ const FavoriteScreens = (props) => {
         imgsource={itemData.item.image}
         title={itemData.item.name}
         price={itemData.item.status}
+        onSelect={() => {
+          props.navigation.navigate({
+            routeName: "ProductDetail",
+            params: {
+              productData: itemData.name,
+            },
+          });
+        }}
       />
     );
   };
@@ -27,7 +35,7 @@ const FavoriteScreens = (props) => {
     <View>
       <FlatList
         keyExtractor={(item) => item._id}
-        data={favData._55}
+        data={favData}
         renderItem={renderGridItem}
         numColumns={2}
       />

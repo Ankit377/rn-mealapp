@@ -30,7 +30,7 @@ const productsReducer = (state = initialStateData, action) => {
       return {
         ...state,
         Products: action.payload,
-        filteredProducts: action.payload,
+
         /* axios(`${Api}/get-all-products`).then(
           (res) =>
             //console.log(res.data.data)
@@ -56,7 +56,7 @@ const productsReducer = (state = initialStateData, action) => {
         const product = state.Products.find(
           (product) => product._id === action.productsId
         );
-        console.log(`${product}` + " product F");
+        console.log(`${product.name}` + " product F");
         return {
           ...state,
           favoriteProducts: state.favoriteProducts.concat(product),
@@ -67,6 +67,6 @@ const productsReducer = (state = initialStateData, action) => {
       return state;
   }
 };
-console.log(initialStateData.Products);
+console.log(initialStateData.favoriteProducts);
 
 export default productsReducer;

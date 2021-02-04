@@ -11,15 +11,15 @@ const ProductList = (props) => {
   //console.log(props.navigation.getParam("subcategoryId"));
   const subcatId = props.navigation.getParam("subcategoryId");
 
-  /*   const availableProducts = useSelector((state) => state.products.Products);
+  const availableProducts = useSelector((state) => state.products.Products);
   //console.log(availableProducts);
 
   const displayProducts = availableProducts.filter(
     (productsAll) => productsAll.sub_category_id == subcatId
-  ); */
+  );
   //console.log(displayProducts);
 
-  useEffect(() => {
+  /*  useEffect(() => {
     axios({
       method: "post",
 
@@ -36,7 +36,7 @@ const ProductList = (props) => {
     //   //console.log(error);
     //   return setErr(error);
     // });
-  }, []);
+  }, []); */
   const renderGridItem = (itemData) => {
     // console.log(itemData);
 
@@ -57,14 +57,12 @@ const ProductList = (props) => {
     );
   };
   return (
-    <View>
-      <FlatList
-        keyExtractor={(item) => item._id}
-        data={products}
-        renderItem={renderGridItem}
-        numColumns={2}
-      />
-    </View>
+    <FlatList
+      keyExtractor={(item) => item._id}
+      data={displayProducts}
+      renderItem={renderGridItem}
+      numColumns={2}
+    />
   );
 };
 ProductList.navigationOptions = (navigationData) => {

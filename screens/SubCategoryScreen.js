@@ -5,9 +5,12 @@ import { NavigationActions } from "react-navigation";
 
 import axios from "axios";
 import CategoryGridTile from "../components/CategoryGridTile";
+import { useDispatch } from "react-redux";
+import { fetchProduct, getProducts } from "../store/actions/productsAction";
 
 const SubCategoryScreen = (props) => {
   const [subCat, setsubCat] = useState([]);
+  const [pro, setPro] = useState([]);
   //console.log(props.navigation.getParam("categoryId"));
   const catId = props.navigation.getParam("categoryId");
 
@@ -32,6 +35,14 @@ const SubCategoryScreen = (props) => {
     //props.navigation not used as it is now  a navigation variable
     props.navigation.setParams({ subCat });
   }, [subCat]);
+  useEffect(() => {
+    axios(`${Api}/get-all-products`)
+      .then((res) => {
+        setPro(res.data.data);
+      })
+      .catch((err) => console.log(err));
+  });
+  const dispatch = useDispatch();
 
   const renderGridItem = (itemData) => {
     // console.log(itemData.item.separators);
@@ -41,6 +52,7 @@ const SubCategoryScreen = (props) => {
         imgsource={itemData.item.image}
         title={itemData.item.name}
         onSelect={() => {
+          // dispatch(getProducts(pro));
           props.navigation.navigate({
             routeName: "ProuductList",
             params: {
@@ -60,14 +72,12 @@ const SubCategoryScreen = (props) => {
     );
   };
   return (
-    <View>
-      <FlatList
-        keyExtractor={(item) => item._id}
-        data={subCat}
-        renderItem={renderGridItem}
-        numColumns={2}
-      />
-    </View>
+    <FlatList
+      keyExtractor={(item) => item._id}
+      data={subCat}
+      renderItem={renderGridItem}
+      numColumns={2}
+    />
   );
 };
 SubCategoryScreen.navigationOptions = (navigationData) => {

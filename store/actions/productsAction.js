@@ -1,12 +1,10 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 export const TOGGLE_FAVORITE = "TOGGLE_FAVORITE";
 export const GET_PRODUCTS = "GET_PRODUCTS";
 export const SET_PRODUCTS = "SET_PRODUCTS";
 export const PRODUCT_ERROR = "PRODUCT_ERROR";
 export const PRODUCT_REQ = "PRODUCT_REQ";
-
-import { connect } from "react-redux";
 
 import axios from "axios";
 import { useDispatch } from "react-redux";
@@ -38,19 +36,14 @@ export const productsError = (error) => {
     payload: error,
   };
 };
-export const fetchProduct = () => {
-  return async function (fp) {
-    //any async code you want
-    connect(productReq());
-    const allProducts = await axios(`${Api}/get-all-products`)
+
+/* export const fetchProduct = () => {
+  return async function () {
+    await axios(`${Api}/get-all-products`)
       .then((res) => {
-        res.data.data;
-        connect(getProducts(allProducts));
-        // console.log(res.data.data);
+        getProducts(res.data.data);
       })
       .catch((err) => console.log(err));
   };
 };
-//const resData = response.json();
-
-//console.log(fetchProduct());
+ */

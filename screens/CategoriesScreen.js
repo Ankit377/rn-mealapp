@@ -6,6 +6,8 @@ import Api from "../api/Api";
 import CategoryGridTile from "../components/CategoryGridTile";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import CustomHeaderButton from "../components/HeaderButton";
+import { useDispatch } from "react-redux";
+import { getProducts } from "../store/actions/productsAction";
 // import { productsReducer } from "../store/reducers/products";
 
 // console.log(productsReducer);
@@ -30,7 +32,18 @@ const CategoriesScreen = (props) => {
         return setErr(error);
       });
   }, []);
+  const [pro, setPro] = useState([]);
 
+  useEffect(() => {
+    axios(`${Api}/get-all-products`)
+      .then((res) => {
+        setPro(res.data.data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
+  const dispatch = useDispatch();
+  dispatch(getProducts(pro));
   const renderGridItem = (itemData) => {
     // console.log(itemData.item.separators);
     return (
@@ -50,14 +63,12 @@ const CategoriesScreen = (props) => {
     );
   };
   return (
-    <View>
-      <FlatList
-        keyExtractor={(item) => item._id}
-        data={prodCat}
-        renderItem={renderGridItem}
-        numColumns={2}
-      />
-    </View>
+    <FlatList
+      keyExtractor={(item) => item._id}
+      data={prodCat}
+      renderItem={renderGridItem}
+      numColumns={2}
+    />
   );
 };
 

@@ -1,12 +1,17 @@
-import React, { useEffect, useCallback } from "react";
+import React, { useEffect, useCallback, useState } from "react";
 import { View, Text, StyleSheet, Button, Image } from "react-native";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import CustomHeaderButton from "../components/HeaderButton";
 import Colors from "../constants/color";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import axios from "axios";
+
 import { useSelector, useDispatch } from "react-redux";
-import { toggleFavorite } from "../store/actions/productsAction";
+import { getProducts, toggleFavorite } from "../store/actions/productsAction";
+import Api from "../api/Api";
 const ProductDetailsScreen = (props) => {
+  const [pro, setPro] = useState([]);
+
   const productData = props.navigation.getParam("productData");
   //console.log(productData._id);
 
@@ -17,11 +22,13 @@ const ProductDetailsScreen = (props) => {
   // );
   // console.log(productSelected[0]._id);
   //console.log(fullDescription);
+  console.log(productData._id);
 
   const dispatch = useDispatch();
 
   const toggleFavoriteHandler = useCallback(() => {
-    dispatch(toggleFavorite());
+    //dispatch(getProducts(pro));
+    dispatch(toggleFavorite(productData._id));
   }, [dispatch]);
 
   useEffect(() => {
@@ -29,6 +36,13 @@ const ProductDetailsScreen = (props) => {
       toggleFav: toggleFavoriteHandler,
     });
   }, [toggleFavoriteHandler]);
+  /* useEffect(() => {
+    axios(`${Api}/get-all-products`)
+      .then((res) => {
+        setPro(res.data.data);
+      })
+      .catch((err) => console.log(err));
+  }); */
   return (
     <View style={styles.screen}>
       <Image
@@ -45,6 +59,9 @@ const ProductDetailsScreen = (props) => {
         title="Fav"
         onPress={() => {
           //console.log("Added in Favorite bottom");
+
+          //dispatch(getProducts(pro));
+          dispatch(toggleFavorite(productData._id));
           props.navigation.navigate({
             routeName: "Favorites",
             params: {
